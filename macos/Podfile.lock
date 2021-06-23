@@ -1,0 +1,28 @@
+PODS:
+  - auto_input (0.0.1):
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+  - path_provider_macos (0.0.1):
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - auto_input (from `Flutter/ephemeral/.symlinks/plugins/auto_input/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - path_provider_macos (from `Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos`)
+
+EXTERNAL SOURCES:
+  auto_input:
+    :path: Flutter/ephemeral/.symlinks/plugins/auto_input/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  path_provider_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos
+
+SPEC CHECKSUMS:
+  auto_input: ceb7b55aad7c24f5a58690494b149b050d242cd8
+  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+  path_provider_macos: a0a3fd666cb7cd0448e936fb4abad4052961002b
+
+PODFILE CHECKSUM: 0d3963a09fc94f580682bd88480486da345dc3f0
+
+COCOAPODS: 1.10.0
