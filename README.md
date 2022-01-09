@@ -11,7 +11,7 @@
 
 # 简介 
 
-*从前*
+从前
 
 想要制作证件照，需要先把图片用QQ传到电脑，再用PS手动抠图；
 
@@ -58,7 +58,7 @@
 
 若非`/usr/local/bin/python3`路径，请先建立软连接
 
-`ln -s 你的python3路径 /usr/bin/local/python3`
+`ln -s 你的python3路径 /usr/local/bin/python3`
 
 **然后安装opencv依赖**
 
@@ -103,7 +103,3 @@ flutter build macos --release
 ## 声明
 
 本项目严重参考自 [cyrildiagne](https://github.com/cyrildiagne) 的 [ar-cutpaste](https://github.com/cyrildiagne/ar-cutpaste)，并加入了对文字与公式识别的支持。
-
-特别感谢 [cyrildiagne](https://github.com/cyrildiagne) 令人惊艳的想法和不可思议的实现。
-
-
