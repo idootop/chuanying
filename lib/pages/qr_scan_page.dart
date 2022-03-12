@@ -23,14 +23,7 @@ class QrScanPage extends StatelessWidget {
         }
       },
       onConnect: () async {
-        final controller = await initeCamera();
-        if (controller != null) {
-          ToastTool.toast('已连接');
-          router.push(CameraPage(controller));
-        } else {
-          ToastTool.toast('未知错误');
-          router.pushToBeRoot(ClientApp());
-        }
+        router.push(CameraPage());
       },
       onDisconnect: () {
         ToastTool.toast('连接已关闭');

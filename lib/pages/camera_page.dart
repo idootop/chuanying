@@ -11,7 +11,7 @@ import 'package:remove_bg/tools/core.dart';
 import 'package:remove_bg/tools/screen/screen_tool.dart';
 import 'package:remove_bg/widgets/loading.dart';
 
-Future<CameraController?> initeCamera() async {
+Future<CameraController?> _initeCamera() async {
   try {
     final cameras = await availableCameras();
     final camera = cameras.firstWhere(
@@ -32,33 +32,55 @@ Future<CameraController?> initeCamera() async {
 }
 
 class CameraPage extends StatefulWidget {
-  final CameraController controller;
-
-  CameraPage(this.controller);
-
   @override
   _CameraPageState createState() => _CameraPageState();
 }
 
-class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
+class _CameraPageState extends State<CameraPage>
+    with WidgetsBindingObserver, TickerProviderStateMixin {
   String _selected = '图片';
+  CameraController? _cameraController;
 
   @override
   void initState() {
     super.initState();
+    initCamera();
     ClientState.init();
   }
 
   @override
   void dispose() {
-    widget.controller.dispose();
+    _cameraController?.dispose();
     super.dispose();
   }
 
+  initCamera() async {
+    //初始化相机
+    _cameraController = await _initeCamera();
+    setState(() {});
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      try {
+        _cameraController?.dispose();
+        _cameraController = null;
+        setState(() {});
+      } catch (_) {}
+    } else if (state == AppLifecycleState.resumed) {
+      if (_cameraController == null ||
+          ClientState.to.where == ClientStates.ready) {
+        initCamera();
+      }
+    }
+  }
+
   Future<Uint8List?> takePhoto() async {
-    final file = await widget.controller.takePicture();
+    final file = await _cameraController?.takePicture();
+    if (file == null) return null;
     if (_selected == '文字' && ClientState.to.where == ClientStates.ready) {
-      return zipImg(file.path,quality: 60);
+      return zipImg(file.path, quality: 60);
     }
     return file.readAsBytes();
   }
@@ -105,12 +127,14 @@ class _CameraPageState extends State<CameraPage> with TickerProviderStateMixin {
         body: SizedBox(
           width: 100.vw,
           height: 100.vh,
-          child: CameraPreview(
-            widget.controller,
-            child: GetBuilder<ClientState>(
-              builder: (_) => _buildOverlay(),
-            ),
-          ),
+          child: _cameraController == null
+              ? Spacer()
+              : CameraPreview(
+                  _cameraController!,
+                  child: GetBuilder<ClientState>(
+                    builder: (_) => _buildOverlay(),
+                  ),
+                ),
         ));
   }
 
