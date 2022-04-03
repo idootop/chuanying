@@ -100,6 +100,6 @@ flutter build ios --release
 flutter build macos --release
 ```
 
-## 声明
+## 鸣谢
 
-本项目严重参考自 [cyrildiagne](https://github.com/cyrildiagne) 的 [ar-cutpaste](https://github.com/cyrildiagne/ar-cutpaste)，并加入了对文字与公式识别的支持。
+本项目创意来自 [cyrildiagne](https://github.com/cyrildiagne) 的 [ar-cutpaste](https://github.com/cyrildiagne/ar-cutpaste)，并在其基础上加入了对文字与公式识别的支持。
